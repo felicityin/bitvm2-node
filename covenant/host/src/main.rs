@@ -84,13 +84,16 @@ use std::sync::Arc;
 
 use clap::Parser;
 use host_executor::{
-    bins::persist_report_hook::PersistExecutionReport, build_executor,
+    build_executor,
     create_eth_block_execution_strategy_factory, BlockExecutor, EthExecutorComponents,
 };
 use provider::create_provider;
 use tracing_subscriber::{
     filter::EnvFilter, fmt, prelude::__tracing_subscriber_SubscriberExt, util::SubscriberInitExt,
 };
+
+mod persist_report_hook;
+use persist_report_hook::PersistExecutionReport;
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
