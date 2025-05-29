@@ -30,10 +30,15 @@ rayon = "1.10.0"
 rlp = "0.5.2"
 
 # workspace
-guest-executor = { git = "https://github.com/zkMIPS/reth-processor" }
-host-executor  = { git = "https://github.com/zkMIPS/reth-processor", features = ["alerting"] }
-primitives     = { git = "https://github.com/zkMIPS/reth-processor" }
-provider       = { git = "https://github.com/zkMIPS/reth-processor" }
+# guest-executor = { git = "https://github.com/zkMIPS/reth-processor" }
+# host-executor  = { git = "https://github.com/zkMIPS/reth-processor", features = ["alerting"] }
+# primitives     = { git = "https://github.com/zkMIPS/reth-processor" }
+# provider       = { git = "https://github.com/zkMIPS/reth-processor" }
+
+guest-executor = { git = "https://github.com/felicityin/reth-processor", branch = "not-verify-hash" }
+host-executor  = { git = "https://github.com/felicityin/reth-processor", branch = "not-verify-hash", features = ["alerting"] }
+primitives     = { git = "https://github.com/felicityin/reth-processor", branch = "not-verify-hash" }
+provider       = { git = "https://github.com/felicityin/reth-processor", branch = "not-verify-hash" }
 
 #guest-executor = { path = "../../reth-processor/crates/executor/guest" }
 #host-executor = { path = "../../reth-processor/crates/executor/host" }
