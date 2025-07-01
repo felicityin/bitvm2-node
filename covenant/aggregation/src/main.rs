@@ -76,14 +76,14 @@ async fn main() {
     block_number_tx.send(args.block_number).unwrap();
 
     let handle1 =
-        tokio::spawn(agg_executor_clone.data_preparer(block_number_rx, input_tx, agg_proof_rx));
-    let handle2 = tokio::spawn(agg_executor.proof_aggregator(
+        tokio::spawn(agg_executor_clone.prepare_data(block_number_rx, input_tx, agg_proof_rx));
+    let handle2 = tokio::spawn(agg_executor.aggregate_proofs(
         block_number_tx,
         input_rx,
         agg_proof_tx,
         groth16_proof_tx,
     ));
-    let handle3 = tokio::spawn(groth16_executor.proof_generator(groth16_proof_rx));
+    let handle3 = tokio::spawn(groth16_executor.generate_proof(groth16_proof_rx));
 
     let _ = tokio::join!(handle1, handle2, handle3);
 }

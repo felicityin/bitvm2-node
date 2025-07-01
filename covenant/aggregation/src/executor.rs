@@ -47,7 +47,7 @@ impl AggregationExecutor {
         Self { db, client, pk, vk, block_number, is_start_block }
     }
 
-    pub async fn data_preparer(
+    pub async fn prepare_data(
         self,
         block_number_rx: Receiver<u64>,
         input_tx: SyncSender<AggreationInput>,
@@ -89,7 +89,7 @@ impl AggregationExecutor {
         }
     }
 
-    pub async fn proof_aggregator(
+    pub async fn aggregate_proofs(
         self,
         block_number_tx: SyncSender<u64>,
         input_rx: Receiver<AggreationInput>,
@@ -214,7 +214,7 @@ impl Groth16Executor {
         Self { db, client, pk, vk }
     }
 
-    pub async fn proof_generator(self, groth16_rx: Receiver<ProofWithPublicValues>) -> Result<()> {
+    pub async fn generate_proof(self, groth16_rx: Receiver<ProofWithPublicValues>) -> Result<()> {
         loop {
             let recv = groth16_rx.recv();
             if let Ok(agg_proof) = recv {
