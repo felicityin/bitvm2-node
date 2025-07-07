@@ -3,6 +3,7 @@ use std::sync::{
     Arc,
 };
 
+use revm_primitives::B256;
 use anyhow::Result;
 use tokio::time::Duration;
 use tracing::{debug, error, info};
@@ -135,7 +136,7 @@ impl AggregationExecutor {
 
     async fn generate_aggregation_proof(
         &self,
-        inputs: Vec<Proof>,
+        mut inputs: Vec<Proof>,
     ) -> Result<(ZKMProofWithPublicValues, ExecutionReport, Duration)> {
         inputs.iter().for_each(|input| {
             assert_eq!(
@@ -163,6 +164,13 @@ impl AggregationExecutor {
         let public_values =
             inputs.iter().map(|input| input.public_values.to_vec()).collect::<Vec<_>>();
         stdin.write::<Vec<Vec<u8>>>(&public_values);
+
+        let states: Vec<(B256, B256)> = inputs.iter_mut().map(|input| {
+            let public_values = &mut input.public_values;
+            // (prev_state_root, cur_state_root)
+            (public_values.read::<B256>(), input.public_values.read::<B256>())
+        }).collect();
+        info!("states: {:?}", states);
 
         // Write the proofs.
         //

@@ -20,6 +20,9 @@ hex.workspace = true
 clap = { version = "4.5.7", features = ["derive", "env"] }
 dotenv = "0.15.0"
 futures-util = "0.3.31"
+revm-primitives = { git = "https://github.com/zkMIPS-patches/revm", branch = "patch-22.0.0-goat", features = [
+    "serde",
+], default-features = false }
 
 # zkMIPS
 zkm-sdk.workspace = true

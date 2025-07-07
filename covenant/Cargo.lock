@@ -64,6 +64,7 @@ dependencies = [
  "futures-util",
  "hex",
  "logroller",
+ "revm-primitives",
  "serde",
  "store",
  "tokio",
