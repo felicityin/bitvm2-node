@@ -9,31 +9,28 @@ use crate::io::ZKMPublicValues;
 mod io;
 
 pub fn main() {
-    // Read the verification keys.
-    let vkeys = zkm_zkvm::io::read::<Vec<[u32; 8]>>();
-
-    // Read the public values.
-    let public_values = zkm_zkvm::io::read::<Vec<Vec<u8>>>();
-
-    assert!(vkeys.len() > 1);
-    assert_eq!(vkeys.len(), public_values.len());
-
-    let states: Vec<(B256, B256)> = public_values.iter().map(|public_value_bytes| {
-        let mut public_value = ZKMPublicValues::from(public_value_bytes);
+    let vkey0 = zkm_zkvm::io::read::<[u32; 8]>();
+    let public_values0 = zkm_zkvm::io::read::<Vec<u8>>();
+    let states0: (B256, B256) = {
+        let mut public_value = ZKMPublicValues::from(&public_values0);
         // (prev_state_root, cur_state_root)
         (public_value.read::<B256>(), public_value.read::<B256>())
-    }).collect();
+    };
+
+    let vkey1 = zkm_zkvm::io::read::<[u32; 8]>();
+    let public_values1 = zkm_zkvm::io::read::<Vec<u8>>();
+    let states1: (B256, B256) = {
+        let mut public_value = ZKMPublicValues::from(&public_values1);
+        // (prev_state_root, cur_state_root)
+        (public_value.read::<B256>(), public_value.read::<B256>())
+    };
+
+    assert_eq!(states0.1, states1.0);
 
     // Verify the proofs.
-    for i in 0..vkeys.len() {
-        if i > 0 {
-            assert_eq!(states[i-1].1, states[i].0);
-        }
+    zkm_zkvm::lib::verify::verify_zkm_proof(&vkey0, &Sha256::digest(&public_values0).into());
+    zkm_zkvm::lib::verify::verify_zkm_proof(&vkey1, &Sha256::digest(&public_values1).into());
 
-        let public_values_digest = Sha256::digest(&public_values[i]);
-        zkm_zkvm::lib::verify::verify_zkm_proof(&vkeys[i], &public_values_digest.into());
-    }
-
-    zkm_zkvm::io::commit(&states.first().unwrap().0); // prev state root
-    zkm_zkvm::io::commit(&states.last().unwrap().1); // cur state root
+    zkm_zkvm::io::commit(&states0.0); // prev state root
+    zkm_zkvm::io::commit(&states1.1); // cur state root
 }
