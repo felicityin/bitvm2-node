@@ -67,6 +67,7 @@ async fn main() -> eyre::Result<()> {
 
     let executor = Arc::new(
         FullExecutor::<EthExecutorComponents<_>, _>::try_new(
+            http_provider.clone(),
             http_provider,
             elf,
             block_execution_strategy_factory,
@@ -139,7 +140,7 @@ async fn process_block<C, P>(
 ) -> eyre::Result<()>
 where
     C: ExecutorComponents<Network = Ethereum>,
-    P: Provider<Ethereum> + Clone,
+    P: Provider<Ethereum> + Clone + 'static,
 {
     let mut retry_count = 0;
 
