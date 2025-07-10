@@ -11,6 +11,7 @@ use zkm_sdk::{
     HashableKey, Prover, ZKMProof, ZKMProofKind, ZKMProofWithPublicValues,
     ZKMProvingKey, ZKMPublicValues, ZKMStdin, ZKMVerifyingKey,
 };
+use host_executor::MaybeProveWithCycles;
 use zkm_verifier::{Groth16Verifier, GROTH16_VK_BYTES};
 
 use crate::db::*;
@@ -26,19 +27,25 @@ pub struct ProofWithPublicValues {
 }
 
 #[derive(Clone)]
-pub struct AggregationExecutor {
+pub struct AggregationExecutor<P>
+where 
+    P: Prover<DefaultProverComponents> + MaybeProveWithCycles + 'static
+{
     db: Arc<Db>,
-    client: Arc<dyn Prover<DefaultProverComponents>>,
+    client: Arc<P>,
     pk: Arc<ZKMProvingKey>,
     vk: Arc<ZKMVerifyingKey>,
     block_number: u64,
     is_start_block: bool,
 }
 
-impl AggregationExecutor {
+impl<P> AggregationExecutor<P>
+where 
+    P: Prover<DefaultProverComponents> + MaybeProveWithCycles + 'static
+{
     pub async fn new(
         db: Arc<Db>,
-        client: Arc<dyn Prover<DefaultProverComponents>>,
+        client: Arc<P>,
         pk: Arc<ZKMProvingKey>,
         vk: Arc<ZKMVerifyingKey>,
         block_number: u64,
