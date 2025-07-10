@@ -76,6 +76,7 @@ async fn main() {
         vk.clone(),
         args.block_number,
         args.start,
+        args.exec,
     )
     .await;
     let agg_executor_clone = AggregationExecutor::new(
@@ -85,6 +86,7 @@ async fn main() {
         vk.clone(),
         args.block_number,
         args.start,
+        args.exec,
     )
     .await;
     let groth16_executor = Groth16Executor::new(local_db, client, pk, vk).await;
