@@ -130,7 +130,6 @@ op-alloy-consensus = { git = "https://github.com/ziren-patches/op-alloy", branch
 op-alloy-network = { git = "https://github.com/ziren-patches/op-alloy", branch = "patch-0.13.0" }
 op-alloy-rpc-types = { git = "https://github.com/ziren-patches/op-alloy", branch = "patch-0.13.0" }
 
-
 [workspace.lints]
 rust.missing_debug_implementations = "warn"
 rust.unreachable_pub = "warn"
@@ -147,3 +146,9 @@ p256 = { git = "https://github.com/ziren-patches/elliptic-curves", branch = "pat
 alloy-primitives-v1-0-0 = { git = "https://github.com/ziren-patches/core.git", package = "alloy-primitives", branch = "patch-alloy-primitives-1.0.0" }
 alloy-primitives-v1-1-0 = { git = "https://github.com/ziren-patches/core.git", package = "alloy-primitives", branch = "patch-alloy-primitives-1.1.0" }
 alloy-primitives-v1-1-2 = { git = "https://github.com/ziren-patches/core.git", package = "alloy-primitives", branch = "patch-alloy-primitives-1.1.2" }
+
+[patch."https://github.com/ProjectZKM/Ziren"]
+zkm-core-executor = { git = "https://github.com/felicityin/zkMIPS", branch = "sdk-pool-interval" }
+zkm-prover = { git = "https://github.com/felicityin/zkMIPS", branch = "sdk-pool-interval" }
+zkm-sdk = { git = "https://github.com/felicityin/zkMIPS", branch = "sdk-pool-interval" }
+zkm-verifier = { git = "https://github.com/felicityin/zkMIPS", branch = "sdk-pool-interval" }
