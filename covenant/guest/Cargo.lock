@@ -1693,7 +1693,7 @@ dependencies = [
 [[package]]
 name = "guest-executor"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#e5ba5d1b581b2ba7805b888f798e03c0d0d929e3"
+source = "git+https://github.com/ProjectZKM/reth-processor?branch=tmp#227088ecf1e34085cb9dc9dcfce9e47901e74715"
 dependencies = [
  "alloy-consensus",
  "alloy-evm",
@@ -2199,7 +2199,7 @@ dependencies = [
 [[package]]
 name = "mpt"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#e5ba5d1b581b2ba7805b888f798e03c0d0d929e3"
+source = "git+https://github.com/ProjectZKM/reth-processor?branch=tmp#227088ecf1e34085cb9dc9dcfce9e47901e74715"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -2712,7 +2712,7 @@ dependencies = [
 [[package]]
 name = "primitives"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#e5ba5d1b581b2ba7805b888f798e03c0d0d929e3"
+source = "git+https://github.com/ProjectZKM/reth-processor?branch=tmp#227088ecf1e34085cb9dc9dcfce9e47901e74715"
 dependencies = [
  "alloy-genesis",
  "alloy-rpc-types",
@@ -2969,7 +2969,7 @@ checksum = "2b15c43186be67a4fd63bee50d0303afffcef381492ebe2c5d87f324e1b8815c"
 [[package]]
 name = "reth-chainspec"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-chains",
  "alloy-consensus",
@@ -2989,7 +2989,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3007,7 +3007,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs-derive"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "convert_case",
  "proc-macro2",
@@ -3018,7 +3018,7 @@ dependencies = [
 [[package]]
 name = "reth-consensus"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
@@ -3031,7 +3031,7 @@ dependencies = [
 [[package]]
 name = "reth-consensus-common"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3043,7 +3043,7 @@ dependencies = [
 [[package]]
 name = "reth-db-models"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
@@ -3053,7 +3053,7 @@ dependencies = [
 [[package]]
 name = "reth-errors"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "reth-consensus",
  "reth-execution-errors",
@@ -3065,7 +3065,7 @@ dependencies = [
 [[package]]
 name = "reth-ethereum-consensus"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3081,7 +3081,7 @@ dependencies = [
 [[package]]
 name = "reth-ethereum-forks"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-eip2124",
  "alloy-hardforks",
@@ -3093,7 +3093,7 @@ dependencies = [
 [[package]]
 name = "reth-ethereum-primitives"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3114,13 +3114,12 @@ dependencies = [
 [[package]]
 name = "reth-evm"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
  "alloy-evm",
  "alloy-primitives",
- "anyhow",
  "auto_impl",
  "derive_more",
  "futures-util",
@@ -3137,7 +3136,7 @@ dependencies = [
 [[package]]
 name = "reth-evm-ethereum"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3155,7 +3154,7 @@ dependencies = [
 [[package]]
 name = "reth-execution-errors"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-evm",
  "alloy-primitives",
@@ -3168,7 +3167,7 @@ dependencies = [
 [[package]]
 name = "reth-execution-types"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3184,7 +3183,7 @@ dependencies = [
 [[package]]
 name = "reth-fs-util"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "serde",
  "serde_json",
@@ -3194,7 +3193,7 @@ dependencies = [
 [[package]]
 name = "reth-metrics"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "metrics",
  "metrics-derive",
@@ -3203,7 +3202,7 @@ dependencies = [
 [[package]]
 name = "reth-network-peers"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -3215,7 +3214,7 @@ dependencies = [
 [[package]]
 name = "reth-primitives-traits"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3242,7 +3241,7 @@ dependencies = [
 [[package]]
 name = "reth-prune-types"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-primitives",
  "derive_more",
@@ -3252,7 +3251,7 @@ dependencies = [
 [[package]]
 name = "reth-stages-types"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-primitives",
  "reth-trie-common",
@@ -3261,7 +3260,7 @@ dependencies = [
 [[package]]
 name = "reth-static-file-types"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-primitives",
  "derive_more",
@@ -3272,7 +3271,7 @@ dependencies = [
 [[package]]
 name = "reth-storage-api"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3294,7 +3293,7 @@ dependencies = [
 [[package]]
 name = "reth-storage-errors"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-eips",
  "alloy-primitives",
@@ -3310,7 +3309,7 @@ dependencies = [
 [[package]]
 name = "reth-tracing"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "clap",
  "eyre",
@@ -3325,7 +3324,7 @@ dependencies = [
 [[package]]
 name = "reth-trie"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -3347,7 +3346,7 @@ dependencies = [
 [[package]]
 name = "reth-trie-common"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-consensus",
  "alloy-primitives",
@@ -3364,7 +3363,7 @@ dependencies = [
 [[package]]
 name = "reth-trie-sparse"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -3381,7 +3380,7 @@ dependencies = [
 [[package]]
 name = "reth-zstd-compressors"
 version = "1.3.10"
-source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#a413a9b241c67a34e8299e0350a8a6d69429ce43"
+source = "git+https://github.com/ziren-patches/reth?branch=patch-1.3.10#12a8abecb951054af6213c399c574c6492aa252d"
 dependencies = [
  "zstd",
 ]
@@ -4860,7 +4859,7 @@ dependencies = [
 [[package]]
 name = "zkm-lib"
 version = "1.1.1"
-source = "git+https://github.com/ProjectZKM/Ziren#5d29c119aff17fb030179559e497d40303608a70"
+source = "git+https://github.com/ProjectZKM/Ziren#be6e4e533f5e404491bb6279b30064b2d9b02854"
 dependencies = [
  "bincode",
  "cfg-if",
@@ -4873,7 +4872,7 @@ dependencies = [
 [[package]]
 name = "zkm-primitives"
 version = "1.1.1"
-source = "git+https://github.com/ProjectZKM/Ziren#5d29c119aff17fb030179559e497d40303608a70"
+source = "git+https://github.com/ProjectZKM/Ziren#be6e4e533f5e404491bb6279b30064b2d9b02854"
 dependencies = [
  "bincode",
  "hex",
@@ -4891,7 +4890,7 @@ dependencies = [
 [[package]]
 name = "zkm-zkvm"
 version = "1.1.1"
-source = "git+https://github.com/ProjectZKM/Ziren#5d29c119aff17fb030179559e497d40303608a70"
+source = "git+https://github.com/ProjectZKM/Ziren#be6e4e533f5e404491bb6279b30064b2d9b02854"
 dependencies = [
  "bincode",
  "cfg-if",
