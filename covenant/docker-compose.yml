@@ -27,5 +27,4 @@ services:
       - ./.env.aggregation
     environment:
       - BLOCK_NUMBER=${BLOCK_NUMBER_A:-2}
-      - START=${START:-true}
     restart: unless-stopped
