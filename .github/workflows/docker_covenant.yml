@@ -2,7 +2,7 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ main ]  # or your deployment branch
+    branches: [ get-last-number ]  # or your deployment branch
   workflow_dispatch:    # allow manual trigger
 
 env:
