@@ -3681,7 +3681,7 @@ dependencies = [
 [[package]]
 name = "guest-executor"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/felicityin/reth-processor?branch=skip-post-validation#42c68cf8ab0a4a9fc15f05e105cd1773de310efd"
 dependencies = [
  "alloy-consensus 0.14.0",
  "alloy-evm",
@@ -3985,7 +3985,7 @@ dependencies = [
 [[package]]
 name = "host-executor"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/felicityin/reth-processor?branch=skip-post-validation#42c68cf8ab0a4a9fc15f05e105cd1773de310efd"
 dependencies = [
  "alloy-chains",
  "alloy-consensus 0.14.0",
@@ -5018,7 +5018,7 @@ dependencies = [
 [[package]]
 name = "mpt"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/felicityin/reth-processor?branch=skip-post-validation#42c68cf8ab0a4a9fc15f05e105cd1773de310efd"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -6205,7 +6205,7 @@ dependencies = [
 [[package]]
 name = "primitives"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/felicityin/reth-processor?branch=skip-post-validation#42c68cf8ab0a4a9fc15f05e105cd1773de310efd"
 dependencies = [
  "alloy-genesis",
  "alloy-rpc-types",
@@ -6369,7 +6369,7 @@ dependencies = [
 [[package]]
 name = "provider"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/felicityin/reth-processor?branch=skip-post-validation#42c68cf8ab0a4a9fc15f05e105cd1773de310efd"
 dependencies = [
  "alloy-json-rpc 0.14.0",
  "alloy-provider",
@@ -7506,7 +7506,7 @@ dependencies = [
 [[package]]
 name = "rpc-db"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/felicityin/reth-processor?branch=skip-post-validation#42c68cf8ab0a4a9fc15f05e105cd1773de310efd"
 dependencies = [
  "alloy-primitives",
  "alloy-provider",
