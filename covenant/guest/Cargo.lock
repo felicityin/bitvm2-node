@@ -1693,7 +1693,7 @@ dependencies = [
 [[package]]
 name = "guest-executor"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/ProjectZKM/reth-processor#e3aa82b1b9d6908072eedd8f94467375981cbb26"
 dependencies = [
  "alloy-consensus",
  "alloy-evm",
@@ -2203,7 +2203,7 @@ dependencies = [
 [[package]]
 name = "mpt"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/ProjectZKM/reth-processor#e3aa82b1b9d6908072eedd8f94467375981cbb26"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -2709,7 +2709,7 @@ dependencies = [
 [[package]]
 name = "primitives"
 version = "0.1.0"
-source = "git+https://github.com/ProjectZKM/reth-processor#9dd4c4a38d5dbe49c81841f8e467bd898a260e49"
+source = "git+https://github.com/ProjectZKM/reth-processor#e3aa82b1b9d6908072eedd8f94467375981cbb26"
 dependencies = [
  "alloy-genesis",
  "alloy-rpc-types",
@@ -4866,7 +4866,7 @@ dependencies = [
 [[package]]
 name = "zkm-lib"
 version = "1.2.0"
-source = "git+https://github.com/ProjectZKM/Ziren#01baa887ddfe4bb60333539b8c6a47c77db6b4aa"
+source = "git+https://github.com/ProjectZKM/Ziren#a4d900694765b0396265fa9f998f800003fdccd2"
 dependencies = [
  "bincode",
  "cfg-if",
@@ -4879,7 +4879,7 @@ dependencies = [
 [[package]]
 name = "zkm-primitives"
 version = "1.2.0"
-source = "git+https://github.com/ProjectZKM/Ziren#01baa887ddfe4bb60333539b8c6a47c77db6b4aa"
+source = "git+https://github.com/ProjectZKM/Ziren#a4d900694765b0396265fa9f998f800003fdccd2"
 dependencies = [
  "bincode",
  "hex",
@@ -4897,7 +4897,7 @@ dependencies = [
 [[package]]
 name = "zkm-zkvm"
 version = "1.2.0"
-source = "git+https://github.com/ProjectZKM/Ziren#01baa887ddfe4bb60333539b8c6a47c77db6b4aa"
+source = "git+https://github.com/ProjectZKM/Ziren#a4d900694765b0396265fa9f998f800003fdccd2"
 dependencies = [
  "bincode",
  "cfg-if",
