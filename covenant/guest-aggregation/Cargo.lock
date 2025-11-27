@@ -5,8 +5,7 @@ version = 4
 [[package]]
 name = "alloy-primitives"
 version = "1.4.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "355bf68a433e0fd7f7d33d5a9fc2583fde70bf5c530f63b80845f8da5505cf28"
+source = "git+https://github.com/ziren-patches/core.git?branch=patch-alloy-primitives-1.4.1#59313700f710f1373a5b4cdc05c51dc3227d8064"
 dependencies = [
  "alloy-rlp",
  "bytes",
@@ -21,6 +20,7 @@ dependencies = [
  "ruint",
  "serde",
  "tiny-keccak",
+ "zkm-zkvm",
 ]
 
 [[package]]
