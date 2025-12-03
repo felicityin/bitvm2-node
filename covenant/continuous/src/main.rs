@@ -102,7 +102,10 @@ async fn main() -> eyre::Result<()> {
 
         task::spawn(async move {
             match process_block(block_number, executor, args.execution_retries).await {
-                Ok(_) => info!("Successfully processed block {block_number}"),
+                Ok(_) => {
+                    info!("Successfully processed block {block_number}");
+                    drop(permit);
+                }
                 Err(err) => {
                     let error_message = format!("Error executing block {block_number}: {err}");
                     error!("{error_message}");
@@ -127,8 +130,6 @@ async fn main() -> eyre::Result<()> {
                     flag.store(true, Ordering::Relaxed);
                 }
             }
-
-            drop(permit);
         });
 
         if failed.load(Ordering::Relaxed) {
