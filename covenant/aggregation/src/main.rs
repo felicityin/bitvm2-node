@@ -130,8 +130,9 @@ async fn calc_block_number(db: &Db, restart: bool, arg_number: u64, agg_block_co
             }
             #[cfg(feature = "test")]
             {
-                let init_number = db.get_init_number().await.expect("Get init number err");
-                let number = if init_number > last_number { init_number } else { last_number };
+                let latest_number =
+                    db.get_lastest_number().await.expect("Get latest number err").unwrap_or(1);
+                let number = if latest_number > last_number { latest_number } else { last_number };
                 return number as u64;
             }
         }
@@ -141,9 +142,10 @@ async fn calc_block_number(db: &Db, restart: bool, arg_number: u64, agg_block_co
     let number = arg_number + agg_block_count - 1;
     #[cfg(feature = "test")]
     let number = {
-        let init_number = db.get_init_number().await.expect("Get init number err") as u64;
-        if init_number > number {
-            init_number
+        let latest_number =
+            db.get_lastest_number().await.expect("Get latest number err").unwrap_or(1) as u64;
+        if latest_number > number {
+            latest_number
         } else {
             number
         }

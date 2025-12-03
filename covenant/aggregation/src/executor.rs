@@ -81,14 +81,7 @@ impl AggregationExecutor {
                             .await
                         {
                             Ok(block_proof) => block_proof?,
-                            Err(e) => {
-                                let latest_number = self.db.get_lastest_number().await?;
-                                self.db
-                                    .set_init_number(latest_number.unwrap() as u64)
-                                    .await
-                                    .expect("Set init number {args.block_number} err");
-                                panic!("[{}] timeout: {:?}", block_number, e);
-                            }
+                            Err(e) => panic!("[{}] timeout: {:?}", block_number, e),
                         };
                     proofs.push(block_proof);
                 }
@@ -112,14 +105,7 @@ impl AggregationExecutor {
                             .await
                             {
                                 Ok(pre_agg_proof) => pre_agg_proof?,
-                                Err(e) => {
-                                    let latest_number = self.db.get_lastest_number().await?;
-                                    self.db
-                                        .set_init_number(latest_number.unwrap() as u64)
-                                        .await
-                                        .expect("Set init number {args.block_number} err");
-                                    panic!("[{}] timeout: {:?}", block_number, e);
-                                }
+                                Err(e) => panic!("[{}] timeout: {:?}", block_number, e),
                             }
                         }
                     } else {
