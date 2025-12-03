@@ -99,7 +99,7 @@ impl Db {
 
             let vk = storage_process.get_verifier_key(&vk_id).await?;
             if vk.is_empty() {
-                return Err(anyhow!("vk is not exists: {}", vk_id));
+                return Err(anyhow!("vk is not exists: {vk_id}"));
             }
             let vk: ZKMVerifyingKey = bincode::deserialize(&vk)?;
 

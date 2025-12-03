@@ -17,6 +17,7 @@ clap = { version = "4.5.7", features = ["derive", "env"] }
 dotenv = "0.15.0"
 eyre = "0.6.12"
 futures-util = "0.3.31"
+lazy_static = "1.5.0"
 
 # workspace
 guest-executor.workspace = true
@@ -45,3 +46,7 @@ store = { path = "../../crates/store" }
 
 [build-dependencies]
 zkm-build.workspace = true
+
+[features]
+default = ["test"]
+test = []

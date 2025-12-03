@@ -2,7 +2,7 @@ use anyhow::Result;
 use store::localdb::LocalDB;
 use zkm_prover::ZKM_CIRCUIT_VERSION;
 use zkm_sdk::ZKMProofWithPublicValues;
-use zkm_verifier::{GROTH16_VK_BYTES, convert_ark, load_ark_groth16_verifying_key_from_bytes};
+use zkm_verifier::{convert_ark, load_ark_groth16_verifying_key_from_bytes, GROTH16_VK_BYTES};
 
 pub type VerifyingKey = ark_groth16::VerifyingKey<ark_bn254::Bn254>;
 pub type Groth16Proof = ark_groth16::Proof<ark_bn254::Bn254>;
@@ -32,7 +32,7 @@ pub async fn get_groth16_vk(db: &LocalDB, zkm_version: &str) -> Result<Verifying
     let mut storage_process = db.acquire().await?;
     let groth16_vk_bytes = storage_process.get_groth16_vk(zkm_version).await?;
     if groth16_vk_bytes.is_empty() {
-        return Err(anyhow::anyhow!("No Groth16 VK found for version: {}", zkm_version));
+        return Err(anyhow::anyhow!("No Groth16 VK found for version: {zkm_version}"));
     }
     Ok(load_ark_groth16_verifying_key_from_bytes(&groth16_vk_bytes)?)
 }
@@ -66,7 +66,7 @@ pub async fn get_groth16_proof(
 #[cfg(test)]
 mod tests {
     use ark_bn254::Bn254;
-    use ark_groth16::{Groth16, r1cs_to_qap::LibsnarkReduction};
+    use ark_groth16::{r1cs_to_qap::LibsnarkReduction, Groth16};
     use store::localdb::LocalDB;
     use tracing::Level;
     use zkm_prover::ZKM_CIRCUIT_VERSION;

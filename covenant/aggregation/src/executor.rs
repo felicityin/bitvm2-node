@@ -43,6 +43,7 @@ pub struct AggregationExecutor {
 }
 
 impl AggregationExecutor {
+    #[allow(clippy::too_many_arguments)]
     pub async fn new(
         db: Arc<Db>,
         client: Arc<dyn Prover<DefaultProverComponents>>,

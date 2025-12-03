@@ -2201,6 +2201,7 @@ dependencies = [
  "futures-util",
  "guest-executor",
  "host-executor",
+ "lazy_static",
  "logroller",
  "primitives",
  "provider",

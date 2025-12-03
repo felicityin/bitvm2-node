@@ -1,4 +1,6 @@
 use std::fmt::Display;
+use std::sync::atomic::AtomicU64;
+use std::sync::atomic::Ordering;
 use std::sync::Arc;
 use std::time::Duration;
 
@@ -9,6 +11,12 @@ use reth_primitives_traits::NodePrimitives;
 use store::localdb::LocalDB;
 use zkm_prover::ZKM_CIRCUIT_VERSION;
 use zkm_sdk::{ExecutionReport, HashableKey, ZKMVerifyingKey};
+
+lazy_static::lazy_static! {
+    static ref LAST_REMOVED_NUMBER: Arc<AtomicU64> = Arc::new(AtomicU64::new(1));
+}
+
+const PROOF_COUNT: u64 = 300;
 
 #[derive(Clone)]
 pub struct PersistToDB {
@@ -119,6 +127,31 @@ impl ExecutionHooks for PersistToDB {
             .await
             .map_err(|e| eyre!("Failed to create vk: {e}"))?;
 
+        #[cfg(feature = "test")]
+        self.remove_old_proofs(block_number).await?;
+
+        Ok(())
+    }
+}
+
+impl PersistToDB {
+    async fn remove_old_proofs(&self, block_number: u64) -> eyre::Result<()> {
+        let last_removed_number = LAST_REMOVED_NUMBER.load(Ordering::Relaxed);
+        tracing::info!("last removed number: {}", last_removed_number);
+
+        if block_number < last_removed_number + PROOF_COUNT {
+            return Ok(());
+        }
+
+        let mut storage_process =
+            self.local_db.acquire().await.map_err(|e| eyre!("Failed to acquire local db: {e}"))?;
+        let remove_number = (block_number - PROOF_COUNT) as i64;
+        storage_process
+            .delete_block_proofs(remove_number)
+            .await
+            .map_err(|e| eyre!("Failed to delete block proofs: {e}"))?;
+
+        LAST_REMOVED_NUMBER.store(block_number, Ordering::Relaxed);
         Ok(())
     }
 }
