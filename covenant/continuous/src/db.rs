@@ -16,7 +16,7 @@ lazy_static::lazy_static! {
     static ref LAST_REMOVED_NUMBER: Arc<AtomicU64> = Arc::new(AtomicU64::new(1));
 }
 
-const PROOF_COUNT: u64 = 300;
+const PROOF_COUNT: u64 = 200;
 
 #[derive(Clone)]
 pub struct PersistToDB {
