@@ -34,4 +34,6 @@ store = { path = "../../crates/store" }
 zkm-build.workspace = true
 
 [features]
+default = ["test"]
 common_prover = []
+test = []

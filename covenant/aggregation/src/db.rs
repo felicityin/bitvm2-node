@@ -52,6 +52,12 @@ impl Db {
         Ok(start_aggregation_number)
     }
 
+    pub async fn get_lastest_number(&self) -> Result<Option<i64>> {
+        let mut storage_process = self.db.acquire().await?;
+
+        storage_process.get_lastest_continuous_number().await
+    }
+
     pub async fn set_aggregation_count(&self, aggregate_block_count: u64) -> Result<()> {
         let mut storage_process = self.db.acquire().await?;
         storage_process.set_aggregation_count(aggregate_block_count as i64).await?;

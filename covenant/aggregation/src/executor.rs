@@ -6,7 +6,7 @@ use std::sync::{
 
 use anyhow::Result;
 use sha2::{Digest, Sha256};
-use tokio::time::Duration;
+use tokio::time::{timeout, Duration};
 use tracing::{debug, error, info};
 use zkm_prover::components::DefaultProverComponents;
 use zkm_sdk::{
@@ -73,7 +73,23 @@ impl AggregationExecutor {
                 let start_number = block_number - self.agg_count + 1;
 
                 for number in start_number..=block_number {
+                    #[cfg(not(feature = "test"))]
                     let block_proof = self.db.load_proof(number, false).await?;
+                    #[cfg(feature = "test")]
+                    let block_proof =
+                        match timeout(Duration::from_secs(30), self.db.load_proof(number, false))
+                            .await
+                        {
+                            Ok(block_proof) => block_proof?,
+                            Err(e) => {
+                                let latest_number = self.db.get_lastest_number().await?;
+                                self.db
+                                    .set_init_number(latest_number.unwrap() as u64)
+                                    .await
+                                    .expect("Set init number {args.block_number} err");
+                                panic!("[{}] timeout: {:?}", block_number, e);
+                            }
+                        };
                     proofs.push(block_proof);
                 }
 
@@ -83,7 +99,29 @@ impl AggregationExecutor {
                 } else {
                     let pre_agg_proof = if restart {
                         restart = false;
-                        self.db.load_proof(block_number - self.agg_count, true).await?
+                        #[cfg(not(feature = "test"))]
+                        {
+                            self.db.load_proof(block_number - self.agg_count, true).await?
+                        }
+                        #[cfg(feature = "test")]
+                        {
+                            match timeout(
+                                Duration::from_secs(30),
+                                self.db.load_proof(block_number - self.agg_count, true),
+                            )
+                            .await
+                            {
+                                Ok(pre_agg_proof) => pre_agg_proof?,
+                                Err(e) => {
+                                    let latest_number = self.db.get_lastest_number().await?;
+                                    self.db
+                                        .set_init_number(latest_number.unwrap() as u64)
+                                        .await
+                                        .expect("Set init number {args.block_number} err");
+                                    panic!("[{}] timeout: {:?}", block_number, e);
+                                }
+                            }
+                        }
                     } else {
                         let agg_proof = agg_proof_rx.recv()?;
                         assert_eq!(agg_proof.block_number, block_number - self.agg_count);

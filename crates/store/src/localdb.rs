@@ -1689,6 +1689,25 @@ impl<'a> StorageProcessor<'a> {
         Ok(if let Some(r) = row { r.block_number } else { None })
     }
 
+    pub async fn get_lastest_continuous_number(&mut self) -> anyhow::Result<Option<i64>> {
+        #[derive(sqlx::FromRow)]
+        struct BlockNumberRow {
+            block_number: Option<i64>,
+        }
+
+        let row = sqlx::query_as!(
+            BlockNumberRow,
+            r#"
+            SELECT MAX(block_number) as block_number
+            FROM block_proof
+            "#,
+        )
+        .fetch_optional(self.conn())
+        .await?;
+
+        Ok(if let Some(r) = row { r.block_number } else { None })
+    }
+
     pub async fn create_aggregation_task(
         &mut self,
         block_number: i64,
