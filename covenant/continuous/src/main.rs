@@ -1,3 +1,4 @@
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 
 use alloy_provider::{network::Ethereum, Provider};
@@ -88,6 +89,8 @@ async fn main() -> eyre::Result<()> {
 
     let concurrent_executions_semaphore = Arc::new(Semaphore::new(args.max_concurrent_executions));
 
+    let failed = Arc::new(AtomicBool::new(false));
+
     loop {
         info!("process block: {:?}", block_number);
 
@@ -95,6 +98,7 @@ async fn main() -> eyre::Result<()> {
         let alerting_client = alerting_client.clone();
         let permit = concurrent_executions_semaphore.clone().acquire_owned().await?;
         let local_db = local_db.clone();
+        let flag = Arc::clone(&failed);
 
         task::spawn(async move {
             match process_block(block_number, executor, args.execution_retries).await {
@@ -121,11 +125,19 @@ async fn main() -> eyre::Result<()> {
                             alerting_client.send_alert(error_message).await;
                         }
                     }
+
+                    flag.store(true, Ordering::Relaxed);
                 }
             }
 
             drop(permit);
         });
+
+        if failed.load(Ordering::Relaxed) {
+            error!("Exit due to the exit of the child thread");
+            #[cfg(not(feature = "test"))]
+            return Ok(());
+        }
 
         block_number += 1;
     }
