@@ -13,7 +13,7 @@ use zkm_verifier::GROTH16_VK_BYTES;
 
 use crate::LAST_REMOVED_NUMBER;
 
-const PROOF_COUNT: u64 = 20;
+const PROOF_COUNT: u64 = 10;
 
 /// An input to the aggregation program.
 ///
