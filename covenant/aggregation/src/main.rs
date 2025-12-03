@@ -123,13 +123,33 @@ async fn calc_block_number(db: &Db, restart: bool, arg_number: u64, agg_block_co
     if restart {
         let last_number = db.get_last_number().await.unwrap();
         tracing::info!("last number: {:?}", last_number);
-        if last_number.is_some() {
-            return last_number.unwrap() as u64 + agg_block_count;
+        if let Some(last_number) = last_number {
+            #[cfg(not(feature = "test"))]
+            {
+                return last_number as u64 + agg_block_count;
+            }
+            #[cfg(feature = "test")]
+            {
+                let init_number = db.get_init_number().await.expect("Get init number err");
+                let number = if init_number > last_number { init_number } else { last_number };
+                return number as u64;
+            }
         }
     }
 
     // Start aggregation from the new height.
-    arg_number + agg_block_count - 1
+    let number = arg_number + agg_block_count - 1;
+    #[cfg(feature = "test")]
+    let number = {
+        let init_number = db.get_init_number().await.expect("Get init number err") as u64;
+        if init_number > number {
+            init_number
+        } else {
+            number
+        }
+    };
+
+    number
 }
 
 async fn get_init_number(db: &Db, start: bool, arg_number: u64) -> u64 {
