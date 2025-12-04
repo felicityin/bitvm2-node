@@ -3,6 +3,9 @@ name = "aggregation"
 version.workspace = true
 edition.workspace = true
 
+[profile.release]
+panic = 'abort'
+
 [dependencies]
 ark-groth16 = { workspace = true }
 ark-bn254 = { workspace = true }

@@ -3,6 +3,9 @@ name = "continuous"
 version.workspace = true
 edition.workspace = true
 
+[profile.release]
+panic = 'abort'
+
 [dependencies]
 bincode.workspace = true
 chrono.workspace = true
