@@ -107,15 +107,23 @@ async fn main() {
 
     let handle1 =
         tokio::spawn(agg_executor_clone.data_preparer(block_number_rx, input_tx, agg_proof_rx));
-    let handle2 = tokio::spawn(agg_executor.proof_aggregator(
+    let _handle2 = tokio::spawn(agg_executor.proof_aggregator(
         block_number_tx,
         input_rx,
         agg_proof_tx,
         groth16_proof_tx,
     ));
-    let handle3 = tokio::spawn(groth16_executor.proof_generator(groth16_proof_rx));
+    let _handle3 = tokio::spawn(groth16_executor.proof_generator(groth16_proof_rx));
 
-    let _ = tokio::join!(handle1, handle2, handle3);
+    #[cfg(feature = "test")]
+    {
+        let _ = tokio::join!(handle1);
+        panic!("Exited due to the failure of data preparer!");
+    }
+    #[cfg(not(feature = "test"))]
+    {
+        let _ = tokio::join!(handle1, _handle2, _handle3);
+    }
 }
 
 async fn calc_block_number(db: &Db, restart: bool, arg_number: u64, agg_block_count: u64) -> u64 {
