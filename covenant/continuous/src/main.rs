@@ -136,7 +136,7 @@ async fn main() -> eyre::Result<()> {
         if failed.load(Ordering::Relaxed) {
             error!("Exit due to the exit of the child thread");
             #[cfg(not(feature = "test"))]
-            return Ok(());
+            painc!("Exit due to the exit of the child thread");
         }
 
         block_number += 1;
