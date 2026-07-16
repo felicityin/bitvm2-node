@@ -48,7 +48,9 @@
 //! - {UserInited, CommitteesAnswered} -> UserDiscarded: lines 429-451 (input UTXO spent
 //!   elsewhere while waiting for BTC confirmation).
 //! - UserBroadcastPeginPrepare -> Presigned: node/src/utils.rs:3889-3895 (`store_graph`,
-//!   once `committee_pre_signed()`).
+//!   once `committee_pre_signed()`), and node/src/utils.rs:4498-4505 (`update_graph_status`,
+//!   as a side effect of a `Graph` transitioning to `GraphStatus::CommitteePresigned`) --
+//!   two independent writers reaching the same edge.
 //! - UserBroadcastPeginPrepare -> PresignedFailed: lines 292-297 (`instance_expiration_monitor`,
 //!   presign time expiry).
 //! - Presigned -> RelayerL1Broadcasted: lines 359-361.

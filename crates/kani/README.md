@@ -12,13 +12,17 @@ Rust state-transition function actually enforces the state machine the protocol 
 Harnesses live here, in this dedicated workspace member (package name `kani-harness`), rather
 than inside the crates they check. This crate depends on those crates as an ordinary path
 dependency (e.g. `store`) and re-models the logic under test as pure functions Kani can
-execute. Current harness sets, both covering `Instance.status` transitions on the same
-`Instance` type (`crates/store/src/schema.rs`):
+execute. Current harness sets, all covering state-transition fields on
+`crates/store/src/schema.rs` types:
 
 - [`src/instance_bridge_in_transition.rs`](src/instance_bridge_in_transition.rs) -- bridge-in
-  (`InstanceBridgeInStatus`, 13 states).
+  `Instance.status` (`InstanceBridgeInStatus`, 13 states). The transition graph is a
+  *reconstruction* -- `bitvm3_instance.ivy` does not constrain it.
 - [`src/instance_bridge_out_transition.rs`](src/instance_bridge_out_transition.rs) -- bridge-out
-  (`InstanceBridgeOutStatus`, 4 states).
+  `Instance.status` (`InstanceBridgeOutStatus`, 4 states). Also a reconstruction.
+- [`src/graph_transition.rs`](src/graph_transition.rs) -- `Graph.status` (`GraphStatus`, 11
+  states). Unlike the two above, this one transcribes an **existing** formal spec --
+  `bitvm3_graph.ivy`'s `axiom allowed_graph_transition` -- rather than reconstructing one.
 
 ## Installing Kani
 
@@ -55,11 +59,12 @@ cargo kani -p kani-harness --harness unguarded_setter_can_violate_spec
 
 Harness names are the function name annotated with `#[kani::proof]` (no path qualification
 needed, as long as it's unique in the crate). `--harness` matches by name across *all* modules,
-so e.g. `unguarded_setter_can_violate_spec` currently matches one harness in
-`instance_bridge_in_transition` **and** one in `instance_bridge_out_transition` (both run). Use the fully
-qualified path (e.g. `--harness instance_bridge_out_transition::verification::unguarded_setter_can_violate_spec`)
-to isolate one. Each run prints a per-check `SUCCESS`/`FAILURE` table and a final
-`VERIFICATION:- SUCCESSFUL` or `VERIFICATION:- FAILED` line per harness.
+so e.g. `unguarded_setter_can_violate_spec` currently matches one harness each in
+`instance_bridge_in_transition`, `instance_bridge_out_transition`, **and**
+`graph_transition` (all three run). Use the fully qualified path (e.g.
+`--harness graph_transition::verification::unguarded_setter_can_violate_spec`) to isolate one.
+Each run prints a per-check `SUCCESS`/`FAILURE` table and a final `VERIFICATION:- SUCCESSFUL`
+or `VERIFICATION:- FAILED` line per harness.
 
 ## Getting a concrete counterexample
 
@@ -135,20 +140,26 @@ crate name once compiled under `cargo kani`.
 
 ## Known limitations of the current harness set
 
-- Both `instance_bridge_in_transition.rs` (13 states, 169 pairs) and `instance_bridge_out_transition.rs`
-  (4 states, 16 pairs) have state spaces small enough that exhaustive unit tests would catch
-  the same bugs. Kani's advantage shows up once a harness reasons over unbounded/numeric inputs
-  (e.g. `committee_quorum_size <= committees_answers.len()`, amounts, block heights, the
-  `bridge_out_lock_time` deadline check); that's the natural next harness to add.
-- Both transition graphs are reconstructions from the scheduled maintenance/event-watch tasks,
-  not an existing spec. In `instance_bridge_in_transition.rs`, one edge
-  (`RelayerL1Broadcasted -> RelayerL2MintedFailed`) is inferred from the enum's existence rather
-  than an observed write site. Treat both graphs as working hypotheses to validate against the
-  team, not ground truth.
-- Neither `try_transition_bridge_in_status` nor `try_transition_bridge_out_status` (the
-  proposed guarded setters) is wired into any real call site yet. The harnesses prove
-  properties about the proposed fix and about the current gap side by side; they don't close
-  the gap in production code.
+- All three harness sets have state spaces small enough that exhaustive unit tests would catch
+  the same bugs (`instance_bridge_in_transition.rs`: 13 states/169 pairs;
+  `instance_bridge_out_transition.rs`: 4 states/16 pairs; `graph_transition.rs`: 11 states/121
+  pairs). Kani's advantage shows up once a harness reasons over unbounded/numeric inputs (e.g.
+  `committee_quorum_size <= committees_answers.len()`, amounts, block heights, the
+  `bridge_out_lock_time`/watchtower-challenge/assert-commit timelock deadline checks in
+  `refresh_graph`); that's the natural next harness to add.
+- `instance_bridge_in_transition.rs` and `instance_bridge_out_transition.rs`'s transition
+  graphs are reconstructions from the scheduled maintenance/event-watch tasks, not an existing
+  spec -- `bitvm3_instance.ivy` does not constrain `bridge_in_status`/`bridge_out_status`
+  transitions the way `bitvm3_graph.ivy` constrains `graph_status`. In
+  `instance_bridge_in_transition.rs`, one edge (`RelayerL1Broadcasted ->
+  RelayerL2MintedFailed`) is inferred from the enum's existence rather than an observed write
+  site. Treat both graphs as working hypotheses to validate against the team, not ground truth.
+  `graph_transition.rs`'s graph does not have this problem: it transcribes
+  `bitvm3_graph.ivy`'s own `axiom allowed_graph_transition`.
+- None of `try_transition_bridge_in_status`, `try_transition_bridge_out_status`, or
+  `try_transition_graph_status` (the proposed guarded setters) is wired into any real call site
+  yet. The harnesses prove properties about the proposed fix and about the current gap side by
+  side; they don't close the gap in production code.
 - `instance_bridge_out_transition.rs`'s `Initialize -> Timeout` edge is only enforced by
   `instance_bridge_out_monitor` for instances with `escrow_hash` set (it queries
   `escrow_hash IS NOT NULL`); the harness set does not currently model that precondition

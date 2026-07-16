@@ -1,2 +1,3 @@
+pub mod graph_transition;
 pub mod instance_bridge_in_transition;
 pub mod instance_bridge_out_transition;
