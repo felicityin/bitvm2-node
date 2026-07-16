@@ -1,0 +1,11 @@
+[package]
+name = "kani-harness"
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dependencies]
+store = { path = "../store" }
+
+[lints.rust]
+unexpected_cfgs = { level = "allow", check-cfg = ["cfg(kani)"] }

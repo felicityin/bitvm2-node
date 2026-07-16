@@ -10,6 +10,7 @@ members = [
     "crates/cbft-rpc",
     "crates/bitvm2-ga",
     "crates/store",
+    "crates/kani",
     "crates/client",
     "crates/util",
     "crates/header-chain",
